@@ -28,7 +28,7 @@ histogram(data, num_bins, 'Normalization','pdf');
 hold on;
 plot(points, density(1,:), 'LineWidth', 2);
 ylabel('Probability');
-ylabel('Data');
+xlabel('Data');
 title('Density estimation. Gaussian KDE h = 1 (Small)');
 
 subplot(3, 1, 2);
@@ -36,13 +36,13 @@ histogram(data, num_bins, 'Normalization','pdf');
 hold on;
 plot(points, density(2,:), 'LineWidth', 2);
 ylabel('Probability');
-ylabel('Data');
-title('Density estimation. Gaussian KDE h = 3 (Best))');
+xlabel('Data');
+title('Density estimation. Gaussian KDE h = 3 (Best)');
 
 subplot(3, 1, 3);
 histogram(data, num_bins, 'Normalization','pdf');
 hold on;
 plot(points, density(3,:), 'LineWidth', 2);
 ylabel('Probability');
-ylabel('Data');
+xlabel('Data');
 title('Density estimation. Gaussian KDE h = 10 (Large)');
