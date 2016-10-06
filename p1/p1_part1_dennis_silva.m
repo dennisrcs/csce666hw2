@@ -10,7 +10,7 @@ maximum = max(data);
 num_points = 50;
 points = linspace(minimum, maximum, num_points);
 density = zeros(3, num_points);
-bandwidths = [1, 4, 10];
+bandwidths = [1, 3, 10];
 
 % calculating density
 for i = 1:size(bandwidths, 2)

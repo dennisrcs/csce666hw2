@@ -1,3 +1,4 @@
+% Part2 (a, b, c)
 % getting data from file
 hw2p1_data = load('hw2p1_data.mat');
 data = hw2p1_data.x;
@@ -7,22 +8,31 @@ data_size = size(data, 2);
 density = zeros(1, data_size-1);
 sum_density_logs = 0;
 
-% making a copy for the original data
-data_bkp = data;
 for i = 1:data_size
+    % splitting data into training and validation set
     [training_set, validation_set] = split_data(data, i);
     
-    training_set = sort(training_set);
     % calculating density
-    for j = 1:size(training_set, 2)
-        density(j) = pkde(training_set(j), data, 4); 
-    end
-    
-    density_at_validation = evaluate_validation_set(validation_set, training_set, density);
+    density_at_validation = pkde(validation_set, training_set, 4); 
     sum_density_logs = sum_density_logs + log(density_at_validation);    
-    
-    data = data_bkp;
 end
 
+log_likelihood = sum_density_logs/data_size;
+
 disp('Average log-likelihood');
-disp(sum_density_logs/data_size);
+disp(log_likelihood);
+
+% Part2 (d, e, f)
+for i = 1:data_size
+    % splitting data into training and validation set
+    [training_set, validation_set] = split_data(data, i);
+
+    bandwidths = get_logspaced_bandwidths(training_set);
+    
+    for j = 1:size(bandwidths, 2)
+        % calculating density
+        density_at_validation = pkde(validation_set, training_set, bandwidths(j)); 
+        sum_density_logs = sum_density_logs + log(density_at_validation);
+    end
+end
+
