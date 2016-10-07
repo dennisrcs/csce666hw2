@@ -1,0 +1,16 @@
+% getting data from file
+hw2p2_data = load('hw2p2_data.mat');
+data = hw2p2_data.x;
+
+% part 1
+scatter3(data(:, 1), data(:, 2), data(:, 3));
+xlabel('1st Dimension');
+ylabel('2nd Dimension');
+zlabel('3rd Dimension');
+
+% part 2
+sigma = cov(data);
+[U, S, V] = svd(sigma);
+
+scores = diag(S);
+figure, semilogx(1:1:size(S, 1), scores);
