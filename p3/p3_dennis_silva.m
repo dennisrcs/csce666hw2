@@ -24,17 +24,25 @@ samples3_augmented = augment_with_noise(samples3, dimensions_augmented);
 % Computing data for first and second principal components
 data = [samples1_augmented; samples2_augmented; samples3_augmented];
 sigma = cov(data);
-[U, S, V] = svd(sigma);
+[U, ~, ~] = svd(sigma);
 U_reduced = U(:, 1:2);
 data_reduced = U_reduced'  * data'; data_reduced = data_reduced';
 
 % Generating labels
-labels = get_labels();
+string_labels = get_string_labels();
 
-scatter(data_reduced(:, 1), data_reduced(:, 2), '*');
-text(data_reduced(:, 1), data_reduced(:, 2), labels);
+figure, scatter(data_reduced(:, 1), data_reduced(:, 2), [], num_labels);
+text(data_reduced(:, 1), data_reduced(:, 2), string_labels);
 xlabel('PC1'); ylabel('PC2');
-axis;
+axis tight;
 
+% Part (b)
+num_labels = get_labels();
+num_labels = num_labels';
 
+[projected_data, U, S] = tamu_lda(data, num_labels);
 
+figure, scatter(projected_data(:, 1), projected_data(:, 2), [], num_labels);
+text(projected_data(:, 1), projected_data(:, 2), string_labels);
+xlabel('PC1'); ylabel('PC2');
+axis tight;
