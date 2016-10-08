@@ -44,17 +44,18 @@ for j = 1:it_num
     lower_dim_training_set2 = pca_training_projected(s+1:2*s, 1:2);
     lower_dim_training_set3 = pca_training_projected(2*s+1:3*s, 1:2);
 
+    lower_dim_training_data = [lower_dim_training_set1; lower_dim_training_set2; lower_dim_training_set3];
+    
     lower_dim_test_set = pca_test_projected(:, 1:2);
-
+    
+    test_ex_per_class = size(test_set1, 1);
+    training_ex_per_class = size(training_set1, 1);
+    
     for i = 1:test_data_size
-        % Computing gi
-        g1 = quadratic_classifier(lower_dim_test_set(i, :), lower_dim_training_set1);
-        g2 = quadratic_classifier(lower_dim_test_set(i, :), lower_dim_training_set2);
-        g3 = quadratic_classifier(lower_dim_test_set(i, :), lower_dim_training_set3);
+        % Predicting test data class
+        class_predicted = knn_predict(lower_dim_test_set(i, :), lower_dim_training_data, training_ex_per_class, k);
 
-        % Checking if the class predicted matches the original class label
-        [~, class_predicted] = max([g1, g2, g3]);
-        curr_label = fix(i/ex_per_class) + 1;
+        curr_label = fix(i/test_ex_per_class) + 1;
         if class_predicted == curr_label
             correct_class = correct_class + 1;
         end

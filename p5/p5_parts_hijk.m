@@ -20,20 +20,14 @@ for j = 1:it_num
 
     s = size(training_set1, 1);
     
-    % Retrieving lower dimensional training and test data
-    lda_training_set1 = lda_training_data(1:s, :);
-    lda_training_set2 = lda_training_data(s+1:2*s, :);
-    lda_training_set3 = lda_training_data(2*s+1:end, :);
+    test_ex_per_class = size(test_set1, 1);
+    training_ex_per_class = size(training_set1, 1);
 
     for i = 1:test_data_size
-        % Computing gi
-        g1 = quadratic_classifier(lda_test_data(i, :), lda_training_set1);
-        g2 = quadratic_classifier(lda_test_data(i, :), lda_training_set2);
-        g3 = quadratic_classifier(lda_test_data(i, :), lda_training_set3);
+        % Predicting test data class
+        class_predicted = knn_predict(lda_test_data(i, :), lda_training_data, training_ex_per_class, k);
 
-        % Checking if the class predicted matches the original class label
-        [max_val, class_predicted] = max([g1, g2, g3]);
-        curr_label = fix(i/ex_per_class) + 1;
+        curr_label = fix(i/test_ex_per_class) + 1;
         if class_predicted == curr_label
             correct_class = correct_class + 1;
         end
