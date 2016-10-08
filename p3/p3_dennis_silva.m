@@ -1,7 +1,7 @@
 % First distribution
 mu1 = [5 0 5];
 sigma1 = [5 -4 -2; -4 4 0; -2 0 5];
-samples1 = mvnrnd(mu1,sigma1,250);
+samples1 = mvnrnd(mu1, sigma1, 250);
 
 % Second distribution
 mu2 = [4 6 7];
@@ -29,6 +29,7 @@ U_reduced = U(:, 1:2);
 data_reduced = U_reduced'  * data'; data_reduced = data_reduced';
 
 % Generating labels
+num_labels = get_num_labels();
 string_labels = get_string_labels();
 
 figure, scatter(data_reduced(:, 1), data_reduced(:, 2), [], num_labels);
@@ -37,7 +38,6 @@ xlabel('PC1'); ylabel('PC2');
 axis tight;
 
 % Part (b)
-num_labels = get_labels();
 num_labels = num_labels';
 
 [projected_data, U, S] = tamu_lda(data, num_labels);
