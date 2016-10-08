@@ -19,9 +19,19 @@ xlabel('Dimensions');
 ylabel('Eigenvalues');
 
 % part c
+
+% plotting penguim
 U_reduced = U(:, 1:3);
 z = U_reduced'  * data'; z = z';
 figure, scatter3(z(:, 1), z(:, 2), z(:, 3));
+xlabel('1st Dimension');
+ylabel('2nd Dimension');
+zlabel('3rd Dimension');
+
+% plotting alien
+U_reduced_234 = U(:, 2:4);
+z_234 = U_reduced_234'  * data'; z_234 = z_234';
+figure, scatter3(z_234(:, 1), z_234(:, 2), z_234(:, 3));
 xlabel('1st Dimension');
 ylabel('2nd Dimension');
 zlabel('3rd Dimension');
