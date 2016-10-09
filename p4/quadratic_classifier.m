@@ -1,6 +1,7 @@
 function g = quadratic_classifier(x, data)
 %QUADRATIC_CLASSIFIER Summary of this function goes here
 %   Detailed explanation goes here
+    
     avg = mean(data);
     cov_matrix = cov(data);
     x_avg_t = (x - avg)';
@@ -10,4 +11,5 @@ function g = quadratic_classifier(x, data)
     third_term = log(1/3);
     
     g = first_term + second_term + third_term;
+
 end

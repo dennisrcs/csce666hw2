@@ -5,7 +5,7 @@ function noisy_data = augment_with_noise(data, num_dimensions)
 
     % Gaussian parameters
     mu = 1;
-    sigma = 6;
+    sigma = 36;
 
     % Pre-allocating memory the final feature vector
     noisy_data = zeros(size(data, 1), size(data, 2) + num_dimensions);
@@ -16,4 +16,3 @@ function noisy_data = augment_with_noise(data, num_dimensions)
     end
 
 end
-

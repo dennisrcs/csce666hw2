@@ -1,7 +1,6 @@
-function labels = get_labels
+function labels = p4_get_labels(num)
 %GET_LABELS Summary of this function goes here
 %   Detailed explanation goes here
-    num = 62;
     lbl1 = zeros(1, num);
     for i = 1:num
         lbl1(i) = 1;

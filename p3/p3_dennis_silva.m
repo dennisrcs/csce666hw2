@@ -15,9 +15,9 @@ samples3 = mvnrnd(mu3, sigma3, 250);
 
 % Augmenting feature vector with 48 noisy dimensions
 dimensions_augmented = 48;
-samples1_augmented = augment_with_noise(samples1, dimensions_augmented);
-samples2_augmented = augment_with_noise(samples2, dimensions_augmented);
-samples3_augmented = augment_with_noise(samples3, dimensions_augmented);
+samples1_augmented = p3_augment_with_noise(samples1, dimensions_augmented);
+samples2_augmented = p3_augment_with_noise(samples2, dimensions_augmented);
+samples3_augmented = p3_augment_with_noise(samples3, dimensions_augmented);
 
 % Part (a)
 
