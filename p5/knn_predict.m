@@ -11,6 +11,7 @@ function prediction = knn_predict(x, data, ex_per_class, k)
     class = fix(idx/ex_per_class) + 1;
     k_classes = class(1:k);
     
+    % Getting the most common class among the top k nearest neighbors
     prediction = mode(k_classes);
 end
 

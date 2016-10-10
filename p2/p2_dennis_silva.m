@@ -13,10 +13,17 @@ sigma = cov(data);
 [U, S, V] = svd(sigma);
 
 eigenvalues = diag(S);
-figure, semilogx(1:1:size(S, 1), eigenvalues, 'LineWidth', 1.5);
-title('Scree plot');
-xlabel('Dimensions');
+figure;
+subplot(1, 2, 1);
+semilogx(1:1:size(S, 1), eigenvalues, 'LineWidth', 1.5);
+xlabel('Eigenvalue index');
 ylabel('Eigenvalues');
+
+cum_eigenvalues = cumsum(eigenvalues);
+subplot(1, 2, 2);
+semilogx(1:1:size(S, 1), cum_eigenvalues/cum_eigenvalues(length(cum_eigenvalues)), 'LineWidth', 1.5);
+xlabel('Eigenvalue index');
+ylabel('Normalized Cumulative Eigenvalues');
 
 % part c
 

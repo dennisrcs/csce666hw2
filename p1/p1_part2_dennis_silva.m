@@ -7,13 +7,14 @@ data = hw2p1_data.x;
 data_size = size(data, 2);
 density = zeros(1, data_size-1);
 sum_density_logs = 0;
+best_bandwidth_part_1 = 2;
 
 for j = 1:data_size
     % splitting data into training and validation set
     [training_set, validation_set] = split_data(data, j);
     
     % calculating density
-    density_at_validation = pkde(validation_set, training_set, 4); 
+    density_at_validation = pkde(validation_set, training_set, best_bandwidth_part_1); 
     sum_density_logs = sum_density_logs + log(density_at_validation);    
 end
 
@@ -40,8 +41,8 @@ for i = 1:num_bandwidths
     avg_densities_log(i) = sum_density_logs / num_bandwidths;
 end
 
-figure, scatter(log(bandwidths), avg_densities_log, 'LineWidth', 1.5);
-xlabel('log(bandwidth)')
+figure, semilogx(bandwidths, avg_densities_log, 'LineWidth', 1.5);
+xlabel('bandwidth')
 ylabel('log-likelihood');
 
 % Part2 (f)
@@ -66,9 +67,9 @@ for i = 1:size(bandwidths_partf, 2)
 end
 
 figure;
-histogram(data, 60, 'Normalization','pdf');
+histogram(data, 50, 'Normalization','pdf');
 hold on;
 plot(points, density_partf(1,:), points, density_partf(2,:), 'LineWidth', 2);
-legend('histogram', strcat('h0 = ', num2str(h0)), strcat('best h = ', num2str(best_bandwidth)));
+legend('histogram', strcat('h0= ', num2str(h0)), strcat('best h= ', num2str(best_bandwidth)));
 ylabel('Probability');
-xlabel('Data');
+xlabel('Data Values');

@@ -11,7 +11,7 @@ for j = 1:it_num
     % Creating training and test set
     training_data = [training_set1; training_set2; training_set3];
     test_data = [test_set1; test_set2; test_set3];
-
+    
     % PCA
     [pca_training_projected, U_pca_reduced] = my_pca(training_data, 3);
     

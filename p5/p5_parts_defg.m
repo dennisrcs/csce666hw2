@@ -1,6 +1,6 @@
 % Part (d, e, f g)
 
-ks = [1, 2, 5, 10, 50, 100, 200];
+ks = [1, 2, 5, 20, 50, 100, 500];
 accs_parts_defg = size(ks, 1);
 it_num = 30;
 
@@ -31,22 +31,6 @@ for k = 1:size(ks, 2)
         pca_training_projected = U_pca_reduced' * training_data'; pca_training_projected = pca_training_projected';
         pca_test_projected = U_pca_reduced' * test_data'; pca_test_projected = pca_test_projected';
 
-        %{
-        % Plotting pairwise scatter plot
-        figure;
-        subplot(1, 3, 1);
-        scatter(pca_test_projected(:, 1), pca_test_projected(:, 2), [], p4_get_test_labels);
-        xlabel('PC1'); ylabel('PC2');
-
-        subplot(1, 3, 2);
-        scatter(pca_test_projected(:, 1), pca_test_projected(:, 3), [], p4_get_test_labels);
-        xlabel('PC1'); ylabel('PC3');
-
-        subplot(1, 3, 3);
-        scatter(pca_test_projected(:, 2), pca_test_projected(:, 3), [], p4_get_test_labels);
-        xlabel('PC2'); ylabel('PC3');
-        %}
-
         s = size(training_set1, 1);
 
         % Retrieving lower dimensional training and test data
@@ -58,7 +42,7 @@ for k = 1:size(ks, 2)
 
         test_ex_per_class = size(test_set1, 1);
         training_ex_per_class = size(training_set1, 1);
-
+        
         for i = 1:test_data_size
             % Predicting test data class
             class_predicted = knn_predict(lower_dim_test_set(i, :), lower_dim_training_data, training_ex_per_class, ks(k));
@@ -74,8 +58,3 @@ for k = 1:size(ks, 2)
     disp(strcat('Accuracy (PCA). k=', num2str(ks(k))));
     disp(accs_parts_defg(k));
 end
-
-figure;
-scatter(ks, accs_parts_defg);
-xlabel('k'); ylabel('average accuracy');
-title('KNN-Accuracy for Reduced Dimensionality using PCA');

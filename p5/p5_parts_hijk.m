@@ -1,6 +1,6 @@
 % Part (h, i, j, k)
 
-ks = [1, 2, 5, 10, 50, 100, 200];
+ks = [1, 2, 5, 20, 50, 100, 500];
 accs_parts_hijk = size(ks, 1);
 it_num = 30;
 
@@ -24,10 +24,6 @@ for k = 1:size(ks, 2)
         [lda_training_data, U_lda, ~] = tamu_lda(training_data, p4_get_training_labels');
         lda_test_data = U_lda'  * test_data'; lda_test_data = lda_test_data';
 
-        %figure;
-        %scatter(lda_test_data(:, 1), lda_test_data(:, 2), [], p4_get_test_labels);
-        %xlabel('PC1'); ylabel('PC2');
-
         s = size(training_set1, 1);
 
         test_ex_per_class = size(test_set1, 1);
@@ -49,8 +45,3 @@ for k = 1:size(ks, 2)
     disp(strcat('Accuracy (LDA). k=', num2str(ks(k))));
     disp(accs_parts_hijk(k));
 end
-
-figure;
-scatter(ks, accs_parts_hijk);
-xlabel('k'); ylabel('average accuracy');
-title('KNN-Accuracy for Reduced Dimensionality using LDA');

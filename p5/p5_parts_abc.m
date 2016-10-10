@@ -21,7 +21,7 @@ samples3_augmented = p5_augment_with_noise(samples3, dimensions_augmented);
 
 % Part (a, b, c)
 
-ks = [1, 2, 5, 10, 50, 100, 200];
+ks = [1, 2, 5, 20, 50, 100, 500];
 accs_parts_abc = size(ks, 1);
 it_num = 30;
 
@@ -46,14 +46,14 @@ for k = 1:size(ks, 2)
         test_data_size = size(test_data, 1);
         test_ex_per_class = size(test_set1, 1);
         training_ex_per_class = size(training_set1, 1);
-
         for i = 1:test_data_size
             class_predicted = knn_predict(test_data(i, :), training_data, training_ex_per_class, ks(k));
-
+            
             curr_label = fix(i/test_ex_per_class) + 1;
             if class_predicted == curr_label
                 correct_class = correct_class + 1;
             end
+            
         end
     end
 
@@ -61,8 +61,3 @@ for k = 1:size(ks, 2)
     disp(strcat('Mean classification high-dimensional data. k=', num2str(ks(k))));
     disp(accs_parts_abc(k));
 end
-
-figure;
-scatter(ks, accs_parts_abc);
-xlabel('k'); ylabel('average accuracy');
-title('KNN-Accuracy for High dimensional space');

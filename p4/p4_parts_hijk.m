@@ -14,9 +14,19 @@ for j = 1:it_num
     [lda_training_data, U_lda, ~] = tamu_lda(training_data, p4_get_training_labels');
     lda_test_data = U_lda'  * test_data'; lda_test_data = lda_test_data';
 
-    %figure;
-    %scatter(lda_test_data(:, 1), lda_test_data(:, 2), [], p4_get_test_labels);
-    %xlabel('PC1'); ylabel('PC2');
+    if j == 1
+        % Plotting pairwise scatter plot (training data)
+        figure;
+        scatter(lda_training_data(:, 1), lda_training_data(:, 2), [], p4_get_labels(train_size));
+        xlabel('Dimension 1'); ylabel('Dimension 2');
+        axis tight;
+
+        % Plotting pairwise scatter plot (test data)
+        figure;
+        scatter(lda_test_data(:, 1), lda_test_data(:, 2), [], p4_get_labels(test_size));
+        xlabel('Dimension 1'); ylabel('Dimension 2');
+        axis tight;
+    end
 
     s = size(training_set1, 1);
     
